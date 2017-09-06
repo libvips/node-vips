@@ -4,7 +4,7 @@
 
 I know almost nothing about node, this is just a proof-of-concept experiment.
 
-At the moment it can create and set/get a bool gvalue and that's it. 
+At the moment it can create and set/get gvalues and that's it. 
 
 # See also
 
