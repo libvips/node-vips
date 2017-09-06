@@ -13,7 +13,7 @@ describe('GValue', function () {
 
     it('Can set/get a bool GValue', function () {
         var gv = new vips.GValue()
-        gv.init(vips.GTYPES.gbool);
+        gv.init(vips.GTYPES.gboolean);
         gv.set(true);
         assert.strictEqual(gv.get(), true);
     });
@@ -34,49 +34,49 @@ describe('GValue', function () {
 
     it('Can set/get a string GValue', function () {
         var gv = new vips.GValue()
-        gv.init(vips.GTYPES.gstr);
+        gv.init(vips.GTYPES.gchararray);
         gv.set("hello world");
         assert.strictEqual(gv.get(), "hello world");
     });
 
     it('Can set/get a utf-8 string GValue', function () {
         var gv = new vips.GValue()
-        gv.init(vips.GTYPES.gstr);
+        gv.init(vips.GTYPES.gchararray);
         gv.set("йцук");
         assert.strictEqual(gv.get(), "йцук");
     });
 
     it('Can set/get an array of int GValue', function () {
         var gv = new vips.GValue()
-        gv.init(vips.GTYPES.array_int);
+        gv.init(vips.GTYPES.VipsArrayInt);
         gv.set([1, 2, 3]);
         assert.deepEqual(gv.get(), [1, 2, 3]);
     });
 
     it('Can set/get an array of double GValue', function () {
         var gv = new vips.GValue()
-        gv.init(vips.GTYPES.array_double);
+        gv.init(vips.GTYPES.VipsArrayDouble);
         gv.set([1.1, 2.1, 3.1]);
         assert.deepEqual(gv.get(), [1.1, 2.1, 3.1]);
     });
 
     it('Can set/get an enum GValue by number', function () {
         var gv = new vips.GValue()
-        gv.init(vips.GTYPES.interpretation);
+        gv.init(vips.GTYPES.VipsInterpretation);
         gv.set(22);
         assert.strictEqual(gv.get(), 'srgb');
     });
 
     it('Can set/get an enum GValue by name', function () {
         var gv = new vips.GValue()
-        gv.init(vips.GTYPES.interpretation);
+        gv.init(vips.GTYPES.VipsInterpretation);
         gv.set('srgb');
         assert.strictEqual(gv.get(), 'srgb');
     });
 
     it('Throws an exception for bad enum value', function () {
         var gv = new vips.GValue()
-        gv.init(vips.GTYPES.interpretation);
+        gv.init(vips.GTYPES.VipsInterpretation);
         assert.throws(function () {
             gv.set('banana');
         });
@@ -84,7 +84,7 @@ describe('GValue', function () {
 
     it('Can set/get a flags GValue', function () {
         var gv = new vips.GValue()
-        gv.init(vips.GTYPES.operation_flags);
+        gv.init(vips.GTYPES.VipsOperationFlags);
         gv.set(12);
         assert.strictEqual(gv.get(), 12);
     });
