@@ -60,4 +60,33 @@ describe('GValue', function () {
         assert.deepEqual(gv.get(), [1.1, 2.1, 3.1]);
     });
 
+    it('Can set/get an enum GValue by number', function () {
+        var gv = new vips.GValue()
+        gv.init(vips.GTYPES.interpretation);
+        gv.set(22);
+        assert.strictEqual(gv.get(), 'srgb');
+    });
+
+    it('Can set/get an enum GValue by name', function () {
+        var gv = new vips.GValue()
+        gv.init(vips.GTYPES.interpretation);
+        gv.set('srgb');
+        assert.strictEqual(gv.get(), 'srgb');
+    });
+
+    it('Throws an exception for bad enum value', function () {
+        var gv = new vips.GValue()
+        gv.init(vips.GTYPES.interpretation);
+        assert.throws(function () {
+            gv.set('banana');
+        });
+    });
+
+    it('Can set/get a flags GValue', function () {
+        var gv = new vips.GValue()
+        gv.init(vips.GTYPES.operation_flags);
+        gv.set(12);
+        assert.strictEqual(gv.get(), 12);
+    });
+
 });
