@@ -6,14 +6,14 @@ const assert = require('assert');
 
 const vips = require('../../');
 
-describe('VipsOperation', function () {
-    it('Can make a VipsOperation', function () {
-        var op = new vips.VipsOperation('black');
+describe('Operation', function () {
+    it('Can make a Operation', function () {
+        var op = new vips.Operation('black');
     });
 
     it('Throws an exception for unknown operation', function () {
         assert.throws(function () {
-            new vips.VipsOperation('banana');
+            new vips.Operation('banana');
         });
     });
 
