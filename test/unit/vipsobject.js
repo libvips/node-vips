@@ -36,4 +36,26 @@ describe('VipsObject', function () {
         assert.strictEqual(name, 'banana');
     });
 
+    it('Can get a property blurb', function () {
+        var vo = vips.vips_operation_new('black');
+        var vips_object = new vips.VipsObject(vo);
+        var blurb = vips_object.get_blurb('nickname');
+        assert.strictEqual(blurb, 'Class nickname');
+    });
+
+    it('Can get object description', function () {
+        var vo = vips.vips_operation_new('black');
+        var vips_object = new vips.VipsObject(vo);
+        var desc = vips_object.get_description();
+        assert.strictEqual(desc, 'make a black image');
+    });
+
+    it('Can set from string', function () {
+        var vo = vips.vips_operation_new('black');
+        var vips_object = new vips.VipsObject(vo);
+        var result = vips_object.set_from_string('nickname = banana');
+        var name = vips_object.get('nickname');
+        assert.strictEqual(name, 'banana');
+    });
+
 });
