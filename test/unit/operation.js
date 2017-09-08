@@ -17,4 +17,10 @@ describe('Operation', function () {
         });
     });
 
+    it('Can get an operation\'s args', function () {
+        var op = new vips.Operation('black');
+        var args = op.get_args();
+        assert.strictEqual(args.length, 6);
+    });
+
 });
