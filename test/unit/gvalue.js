@@ -82,7 +82,7 @@ describe('GValue', function () {
         });
     });
 
-    it('Can set/get a flags', function () {
+    it('Can set/get flags', function () {
         var gv = new vips.GValue()
         gv.init(vips.GTYPES.VipsOperationFlags);
         gv.set(12);

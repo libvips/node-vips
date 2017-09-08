@@ -20,7 +20,9 @@ describe('Operation', function () {
     it('Can get an operation\'s args', function () {
         var op = new vips.Operation('black');
         var args = op.get_args();
-        assert.strictEqual(args.length, 6);
+        assert.strictEqual(args.length, 4);
+        assert.strictEqual(args[0][0], 'out');
+        assert.strictEqual(args[0][1], 35);
     });
 
 });
