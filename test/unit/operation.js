@@ -25,4 +25,10 @@ describe('Operation', function () {
         assert.strictEqual(args[0][1], 35);
     });
 
+    it('Can get an operation\'s flags', function () {
+        var op = new vips.Operation('black');
+        var flags = op.get_flags();
+        assert.strictEqual(flags, 0);
+    });
+
 });
