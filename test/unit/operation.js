@@ -31,4 +31,46 @@ describe('Operation', function () {
         assert.strictEqual(flags, 0);
     });
 
+    it('call throws an exception for unknown operation', function () {
+        assert.throws(function () {
+            vips.call('banana');
+        });
+    });
+
+    it('call needs at least one arg', function () {
+        assert.throws(function () {
+            vips.call();
+        });
+    });
+
+    it('call("black", 10, 10) does not fail', function () {
+        var image = vips.call('black', 10, 10);
+    });
+
+    it('call throws an exception for too many args', function () {
+        assert.throws(function () {
+            var image = vips.call('black', 10, 10, 20);
+        });
+    });
+
+    it('call throws an exception for too few args', function () {
+        assert.throws(function () {
+            var image = vips.call('black', 20);
+        });
+    });
+
+    it('call allows final hash arg', function () {
+        var image = vips.call('black', 10, 10, {});
+    });
+
+    it('final hash arg can have options', function () {
+        var image = vips.call('black', 10, 10, {bands: 2});
+    });
+
+    it('call throws an exception for unknown option', function () {
+        assert.throws(function () {
+            var image = vips.call('black', 10, 10, {banana: 2});
+        });
+    });
+
 });
