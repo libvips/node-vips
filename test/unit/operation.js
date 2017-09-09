@@ -8,17 +8,17 @@ const vips = require('../../');
 
 describe('Operation', function () {
     it('Can make a Operation', function () {
-        var op = new vips.Operation('black');
+        var op = vips.Operation.new_from_name('black');
     });
 
     it('Throws an exception for unknown operation', function () {
         assert.throws(function () {
-            new vips.Operation('banana');
+            vips.Operation.new_from_name('banana');
         });
     });
 
     it('Can get an operation\'s args', function () {
-        var op = new vips.Operation('black');
+        var op = vips.Operation.new_from_name('black');
         var args = op.get_args();
         assert.strictEqual(args.length, 4);
         assert.strictEqual(args[0][0], 'out');
@@ -26,7 +26,7 @@ describe('Operation', function () {
     });
 
     it('Can get an operation\'s flags', function () {
-        var op = new vips.Operation('black');
+        var op = vips.Operation.new_from_name('black');
         var flags = op.get_flags();
         assert.strictEqual(flags, 0);
     });
