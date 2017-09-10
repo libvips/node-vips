@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const assert = require('assert');
 const vips = require('../../');
+const fixtures = require('../fixtures');
 
 function almostEqual(a, b, precision) {
     precision = typeof precision !== 'undefined' ? precision : 0.000001;
@@ -39,5 +40,19 @@ describe('Image', function () {
         assert.strictEqual(image.scale, 1);
         assert.strictEqual(image.offset, 0);
     });
+
+    it('can get type of image metadata items', function () {
+        var image = vips.Image.new_from_file(fixtures.input_jpeg_file);
+        assert.strictEqual(image.get_typeof('icc-profile-data'), 
+            vips.GTYPES.VipsBlob);
+    });
+
+    it('can get image metadata items', function () {
+        var image = vips.Image.new_from_file(fixtures.input_jpeg_file);
+        var profile = image.get('icc-profile-data');
+        assert.strictEqual(profile.length, 560); 
+        assert.strictEqual(profile[profile.length - 1], 156); 
+    });
+
 
 });
