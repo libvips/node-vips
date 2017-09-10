@@ -41,18 +41,45 @@ describe('Image', function () {
         assert.strictEqual(image.offset, 0);
     });
 
-    it('can get type of image metadata items', function () {
+    it('Can get type of image metadata items', function () {
         var image = vips.Image.new_from_file(fixtures.input_jpeg_file);
         assert.strictEqual(image.get_typeof('icc-profile-data'), 
             vips.GTYPES.VipsBlob);
     });
 
-    it('can get image metadata items', function () {
+    it('Can get image metadata items', function () {
         var image = vips.Image.new_from_file(fixtures.input_jpeg_file);
         var profile = image.get('icc-profile-data');
         assert.strictEqual(profile.length, 560); 
         assert.strictEqual(profile[profile.length - 1], 156); 
     });
 
+    it('Can enumerate image metadata', function () {
+        var image = vips.Image.new_from_file(fixtures.input_jpeg_file);
+        var fields = image.get_fields();
+        assert.strictEqual(fields.length, 63); 
+    });
+
+    it('Can create image metadata', function () {
+        var image = vips.call('black', 20, 10);
+        image.set_typeof(vips.GTYPES.gint, 'banana', 42);
+        assert.strictEqual(image.get('banana'), 42);
+    });
+
+    it('Can update image metadata', function () {
+        var image = vips.call('black', 20, 10);
+        image.set_typeof(vips.GTYPES.gint, 'banana', 42);
+        image.set('banana', 45);
+        assert.strictEqual(image.get('banana'), 45);
+    });
+
+    it('Can remove image metadata', function () {
+        var image = vips.call('black', 20, 10);
+        image.set_typeof(vips.GTYPES.gint, 'banana', 42);
+        image.remove('banana');
+        assert.throws(function () {
+            image.get('banana');
+        });
+    });
 
 });
