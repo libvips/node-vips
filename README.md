@@ -62,3 +62,9 @@ Run a single test with the GC enabled
 
 	./node_modules/.bin/mocha --expose-gc test/unit/image.js 
 
+Regenerate convenience wrappers
+
+	vips = require('vips')
+	vips.generate_wrappers()
+
+and paste output into lib/autogen.js
