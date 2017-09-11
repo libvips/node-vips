@@ -2,8 +2,6 @@
 
 # Status
 
-I know almost nothing about node, this is just a proof-of-concept experiment.
-
 It's sort-of working, it can run stuff like this:
 
 ```javascript
@@ -36,12 +34,16 @@ This is based (mostly) on lua-vips, since Lua and JS are rather similar:
 
 https://github.com/jcupitt/lua-vips
 
-# Reference
+# References
 
 https://github.com/node-ffi/node-ffi
+
 https://github.com/TooTallNate/ref
+
 https://github.com/TooTallNate/ref-array
+
 https://github.com/TooTallNate/ref-struct
+
 https://github.com/TooTallNate/weak
 
 https://github.com/node-ffi/node-ffi/wiki/Node-FFI-Tutorial
