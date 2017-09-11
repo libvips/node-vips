@@ -7,6 +7,13 @@ const assert = require('assert');
 const vips = require('../../');
 
 describe('Operation', function () {
+    beforeEach(function () {
+        if ('gc' in global) {
+            console.log("gc-ing");
+            global.gc();
+        }
+    });
+
     it('Can make a Operation', function () {
         var op = vips.Operation.new_from_name('black');
     });

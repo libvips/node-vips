@@ -13,7 +13,14 @@ function almostEqual(a, b, precision) {
     return Math.abs(a - b) < precision;
 }
 
-describe('Image', function () {
+describe('Image IO', function () {
+    beforeEach(function () {
+        if ('gc' in global) {
+            console.log("gc-ing");
+            global.gc();
+        }
+    });
+
     it('Can write a vips image', function () {
         var image = vips.call('black', 20, 10);
         image.write_to_file(fixtures.output_vips_file);

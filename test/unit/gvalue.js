@@ -8,6 +8,13 @@ const ref = require('ref');
 const vips = require('../../');
 
 describe('GValue', function () {
+    beforeEach(function () {
+        if ('gc' in global) {
+            console.log("gc-ing");
+            global.gc();
+        }
+    });
+
     it('Can make a GValue', function () {
         var gv = new vips.GValue();
     });
@@ -47,7 +54,13 @@ describe('GValue', function () {
         assert.strictEqual(gv.get(), "йцук");
     });
 
-    it('Can set/get an array of int', function () {
+    it('Can set an array of int', function () {
+        var gv = new vips.GValue();
+        gv.init(vips.GTYPES.VipsArrayInt);
+        gv.set([1, 2, 3]);
+    });
+
+    it('Can get an array of int', function () {
         var gv = new vips.GValue();
         gv.init(vips.GTYPES.VipsArrayInt);
         gv.set([1, 2, 3]);

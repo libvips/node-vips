@@ -7,6 +7,13 @@ const assert = require('assert');
 const vips = require('../../');
 
 describe('VipsObject', function () {
+    beforeEach(function () {
+        if ('gc' in global) {
+            console.log("gc-ing");
+            global.gc();
+        }
+    });
+
     it('Can make a VipsObject', function () {
         var vo = vips.vips_operation_new('black');
         var vips_object = new vips.VipsObject(vo);
