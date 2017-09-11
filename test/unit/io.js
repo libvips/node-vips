@@ -65,4 +65,34 @@ describe('Image IO', function () {
         });
     });
 
+    it('Can save a formatted image to memory', function () {
+        var image = vips.Image.new_from_file(fixtures.input_jpeg_file);
+        var buf1 = image.write_to_buffer('.jpg');
+        var buf2 = image.write_to_buffer('.jpg', {Q: 90});
+        assert.ok(buf1.length > 1000);
+        assert.ok(buf1.length < buf2.length);
+    });
+
+    it('Can load a formatted image from memory', function () {
+        var image = vips.Image.new_from_file(fixtures.input_jpeg_file);
+        var buf = image.write_to_buffer('.jpg');
+        var image2 = vips.Image.new_from_buffer(buf);
+        assert.ok(almostEqual(image.avg(), image2.avg(), 0.01));
+    });
+
+    it('Can save a raw image to memory', function () {
+        var image = vips.Image.new_from_file(fixtures.input_jpeg_file);
+        var buf = image.write_to_memory();
+        assert.strictEqual(buf.length, image.width * image.height * image.bands);
+    });
+
+    it('Can load a raw image from memory', function () {
+        var image = vips.Image.new_from_file(fixtures.input_jpeg_file);
+        var buf = image.write_to_memory();
+        var image2 = vips.Image.new_from_memory(buf, 
+            image.width, image.height, image.bands, image.format); 
+        assert.ok(almostEqual(image.avg(), image2.avg(), 0.01));
+    });
+
+
 });
