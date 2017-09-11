@@ -7,22 +7,22 @@ I know almost nothing about node, this is just a proof-of-concept experiment.
 It's sort-of working, it can run stuff like this:
 
 ```javascript
-	vips = require('vips');
+vips = require('vips');
 
-	var image = vips.Image.new_from_file('k2.jpg');
+var image = vips.Image.new_from_file('k2.jpg');
 
-	var image = vips.Image.new_from_file('k2.jpg', {shrink: 2});
+var image = vips.Image.new_from_file('k2.jpg', {shrink: 2});
 
-	var pixel = Image.black(1, 1).add(value).cast(this.format);
-	var image = pixel.embed(0, 0, this.width, this.height,
-	    {extend: 'copy'});
-	image = image.copy({
-	    interpretation: this.interpretation,
-	    xres: this.xres,
-	    yres: this.yres,
-	    xoffset: this.xoffset,
-	    yoffset: this.yoffset
-	});
+var pixel = Image.black(1, 1).add(value).cast(this.format);
+var image = pixel.embed(0, 0, this.width, this.height,
+    {extend: 'copy'});
+image = image.copy({
+    interpretation: this.interpretation,
+    xres: this.xres,
+    yres: this.yres,
+    xoffset: this.xoffset,
+    yoffset: this.yoffset
+});
 ```
 
 With no leaks or memory errors. It has a set of 60 or so unit tests which all
