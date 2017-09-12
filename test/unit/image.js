@@ -212,4 +212,22 @@ describe('Image', function () {
 
     });
 
+    it('.maxpos works', function () {
+        var image = vips.Image.black(64, 64);
+        var image2 = image.draw_rect(255, 31, 32, 1, 1);
+        var result = image2.maxpos();
+        assert.strictEqual(result[0], 31);
+        assert.strictEqual(result[1], 32);
+
+    });
+
+    it('.minpos works', function () {
+        var image = vips.Image.black(64, 64).invert();
+        var image2 = image.draw_rect(0, 30, 32, 1, 1);
+        var result = image2.minpos();
+        assert.strictEqual(result[0], 30);
+        assert.strictEqual(result[1], 32);
+
+    });
+
 });

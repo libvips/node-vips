@@ -195,4 +195,12 @@ describe('Image arithmetic', function () {
 
     });
 
+    it('Trigs and logs work', function () {
+        var image = vips.Image.black(2, 1).add(29);
+        var image2 = image.sin().cos().tan().exp().exp10();
+        var image3 = image2.log10().log().atan().acos().asin();
+        almostEqual(image3.avg(), 29, 0.001);
+
+    });
+
 });
