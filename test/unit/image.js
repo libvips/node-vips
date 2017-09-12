@@ -163,4 +163,53 @@ describe('Image', function () {
 
     });
 
+    it('.bandsplit works', function () {
+        var image = vips.Image.new_from_file(fixtures.input_jpeg_file);
+        var bands = image.bandsplit();
+        assert.strictEqual(image.width, bands[0].width);
+        assert.strictEqual(image.height, bands[0].height);
+        assert.strictEqual(bands[0].bands, 1);
+        assert.deepEqual(image.getpoint(0, 0)[0], bands[0].getpoint(0, 0)[0]);
+        
+    });
+
+    it('.bandjoin works with scalar, vector and image args', function () {
+        var image = vips.Image.black(2, 1).add([10, 11, 12]);
+        var image2 = image.bandjoin(255);
+        assert.strictEqual(image2.width, 2);
+        assert.strictEqual(image2.height, 1);
+        assert.strictEqual(image2.bands, 4);
+        assert.strictEqual(image2.format, 'float');
+        assert.strictEqual(image2.interpretation, 'b-w');
+        assert.deepEqual(image2.getpoint(0, 0), [10, 11, 12, 255]);
+
+        var image = vips.Image.black(2, 1).add([10, 11, 12]);
+        var image2 = image.bandjoin([128, 255]);
+        assert.strictEqual(image2.bands, 5);
+        assert.strictEqual(image2.format, 'float');
+        assert.strictEqual(image2.interpretation, 'b-w');
+        assert.deepEqual(image2.getpoint(0, 0), [10, 11, 12, 128, 255]);
+
+        var image = vips.Image.black(2, 1).add([10, 11, 12]);
+        var image2 = image.bandjoin([128, image]);
+        assert.strictEqual(image2.bands, 7);
+        assert.strictEqual(image2.format, 'float');
+        assert.strictEqual(image2.interpretation, 'b-w');
+        assert.deepEqual(image2.getpoint(0, 0), [10, 11, 12, 128, 10, 11, 12]);
+
+    });
+
+    it('Can draw on an image', function () {
+        var image = vips.Image.black(64, 64);
+        var image2 = image.draw_circle(255, 32, 32, 32, {fill: true});
+        assert.strictEqual(image2.width, 64);
+        assert.strictEqual(image2.height, 64);
+        assert.strictEqual(image2.bands, 1);
+        assert.strictEqual(image2.format, 'uchar');
+        assert.deepEqual(image2.getpoint(0, 0), [0]);
+        assert.deepEqual(image2.getpoint(32, 32), [255]);
+        assert.strictEqual(image.avg(), 0);
+
+    });
+
 });
