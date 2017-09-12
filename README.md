@@ -2,31 +2,27 @@
 
 # Status
 
-It's sort-of working, it can run stuff like this:
+It's mostly complete, it seems stable, and it passes the tests suite with no
+errors or leaks. 
+
+# Example
 
 ```javascript
 vips = require('vips');
 
-var image = vips.Image.new_from_file('k2.jpg');
+image = vips.Image.new_from_file(process.argv[2]);
+image = image.crop(100, 100, image.width - 200, image.height - 200);
 
-var image = vips.Image.new_from_file('k2.jpg', {shrink: 2});
+image = image.reduce(1.0 / 0.9, 1.0 / 0.9, {kernel: 'linear'});
 
-var pixel = Image.black(1, 1).add(value).cast(this.format);
-var image = pixel.embed(0, 0, this.width, this.height,
-    {extend: 'copy'});
-image = image.copy({
-    interpretation: this.interpretation,
-    xres: this.xres,
-    yres: this.yres,
-    xoffset: this.xoffset,
-    yoffset: this.yoffset
-});
+mask = vips.Image.new_from_array(
+    [[-1,  -1, -1], 
+     [-1,  16, -1], 
+     [-1,  -1, -1]], 8);
+image = image.conv(mask, {precision: 'integer'});
+
+image.write_to_file(process.argv[3]);
 ```
-
-With no leaks or memory errors. It has a set of 60 or so unit tests which all
-pass. 
-
-There's still a lot missing. 
 
 # See also
 
@@ -67,4 +63,4 @@ Regenerate convenience wrappers
 	vips = require('vips')
 	vips.generate_wrappers()
 
-and paste output into lib/autogen.js
+and copy output to `lib/autogen.js`.
