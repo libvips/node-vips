@@ -170,4 +170,29 @@ describe('Image arithmetic', function () {
 
     });
 
+    it('.remainder works with scalar, vector and image arguments', function () {
+        var image = vips.Image.black(2, 1);
+        var image2 = image.add(10).remainder(3);
+        assert.strictEqual(image2.width, 2);
+        assert.strictEqual(image2.height, 1);
+        assert.strictEqual(image2.format, 'float');
+        assert.strictEqual(image2.interpretation, 'b-w');
+        assert.deepEqual(image2.getpoint(0, 0), [1]);
+
+        var image2 = image.add([10, 30]).remainder([3, 4]);
+        assert.strictEqual(image2.width, 2);
+        assert.strictEqual(image2.height, 1);
+        assert.strictEqual(image2.format, 'float');
+        assert.strictEqual(image2.interpretation, 'b-w');
+        assert.deepEqual(image2.getpoint(0, 0), [1, 2]);
+
+        var image2 = image2.add(image2).remainder(image2);
+        assert.strictEqual(image2.width, 2);
+        assert.strictEqual(image2.height, 1);
+        assert.strictEqual(image2.format, 'float');
+        assert.strictEqual(image2.interpretation, 'b-w');
+        assert.deepEqual(image2.getpoint(0, 0), [0, 0]);
+
+    });
+
 });

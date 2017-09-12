@@ -138,4 +138,29 @@ describe('Image', function () {
         assert.strictEqual(image2.avg(), 2);
     });
 
+    it('.ifthenelse works with scalar, vector and image args', function () {
+        var image = vips.Image.black(2, 1).add([10, 11, 12]);
+        var image2 = image.more(11).ifthenelse(1, 2);
+        assert.strictEqual(image2.width, 2);
+        assert.strictEqual(image2.height, 1);
+        assert.strictEqual(image2.format, 'uchar');
+        assert.strictEqual(image2.interpretation, 'b-w');
+        assert.deepEqual(image2.getpoint(0, 0), [2, 2, 1]);
+
+        var image2 = image.more(11).ifthenelse([1, 2, 3], 2);
+        assert.strictEqual(image2.width, 2);
+        assert.strictEqual(image2.height, 1);
+        assert.strictEqual(image2.format, 'uchar');
+        assert.strictEqual(image2.interpretation, 'b-w');
+        assert.deepEqual(image2.getpoint(0, 0), [2, 2, 3]);
+
+        var image2 = image.more(11).ifthenelse([1, 2, 3], image);
+        assert.strictEqual(image2.width, 2);
+        assert.strictEqual(image2.height, 1);
+        assert.strictEqual(image2.format, 'float');
+        assert.strictEqual(image2.interpretation, 'b-w');
+        assert.deepEqual(image2.getpoint(0, 0), [10, 11, 3]);
+
+    });
+
 });
