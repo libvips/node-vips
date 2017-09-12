@@ -28,7 +28,7 @@ describe('Image', function () {
         assert.strictEqual(vips.call('avg', image), 0);
     });
 
-    it('Image properties work', function () {
+    it('Properties work', function () {
         var image = vips.call('black', 20, 10);
         assert.strictEqual(image.width, 20);
         assert.strictEqual(image.height, 10);
@@ -39,7 +39,6 @@ describe('Image', function () {
         assert.strictEqual(image.yres, 1);
         assert.strictEqual(image.xoffset, 0);
         assert.strictEqual(image.yoffset, 0);
-        assert.strictEqual(image.filename, 'temp-0');
         assert.strictEqual(image.scale, 1);
         assert.strictEqual(image.offset, 0);
     });
@@ -132,13 +131,11 @@ describe('Image', function () {
     it('Can make a vector constant image', function () {
         var image = vips.Image.black(2, 1);
         var image2 = image.new_from_image([1, 2, 3]);
-        /*
         assert.strictEqual(image2.width, 2);
         assert.strictEqual(image2.height, 1);
-        assert.strictEqual(image2.format, 'double');
-        assert.strictEqual(image2.interpretation, 'matrix');
+        assert.strictEqual(image2.format, 'uchar');
+        assert.strictEqual(image2.interpretation, 'b-w');
         assert.strictEqual(image2.avg(), 2);
-         */
     });
 
 });
