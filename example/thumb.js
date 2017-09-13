@@ -8,7 +8,7 @@ function via_memory(filename, thumbnail_width) {
     console.log('memory processing', filename);
 
     var data = fs.readFileSync(filename);
-    var thumb = vips.Image.thumbnail_buffer(data, thumbnail_width, 
+    var thumb = vips.Image.thumbnail_buffer(data, thumbnail_width,
         {crop: 'centre'});
 
     return thumb.write_to_buffer('.jpg');
@@ -18,8 +18,8 @@ function via_memory(filename, thumbnail_width) {
 function via_files(filename, thumbnail_width) {
     console.log('file processing', filename);
 
-    var thumb = vips.Image.thumbnail(filename, thumbnail_width, 
-        {crop: 'centre'})
+    var thumb = vips.Image.thumbnail(filename, thumbnail_width,
+        {crop: 'centre'});
 
     return thumb.write_to_buffer('.jpg');
 }

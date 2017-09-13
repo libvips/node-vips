@@ -4,8 +4,7 @@
     "version": "0.1.0",
     "author": "John Cupitt <jcupitt@gmail.com>",
     "homepage": "https://github.com/jcupitt/node-vips",
-    "contributors": [
-    ],
+    "contributors": [],
     "main": "lib/index.js",
     "scripts": {
         "test": "semistandard && cc && nyc --reporter=lcov --branches=99 mocha --slow=5000 --timeout=60000 ./test/unit/*.js",
@@ -20,9 +19,9 @@
         "libvips",
         "vips"
     ],
-    "bugs": { 
-        "url": "https://github.com/jcupitt/node-vips/issues", 
-        "email" : "jcupitt@gmail.com"
+    "bugs": {
+        "url": "https://github.com/jcupitt/node-vips/issues",
+        "email": "jcupitt@gmail.com"
     },
     "dependencies": {
         "ffi": "^2.2.0",
@@ -40,7 +39,6 @@
     "license": "MIT",
     "cc": {
         "linelength": "80",
-        "filter": [
-        ]
+        "filter": []
     }
 }
