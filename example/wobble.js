@@ -26,7 +26,7 @@ function wobble(image) {
 
     // scale sin(distance) by 1/distance to make a wavey pattern
     var num = polar_bands[0].multiply(3).sin();
-    var denom = polar_bands[0].add(1)
+    var denom = polar_bands[0].add(1);
     var d = num.divide(denom).multiply(10000);
 
     // and back to rectangular coordinates again to make a set of vectors we can
