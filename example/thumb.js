@@ -46,8 +46,7 @@ function via_files(filename, thumbnail_width) {
 for (var i = 2; i < process.argv.length; i++) {
     var filename = process.argv[i];
 
-    console.log('processing' + filename + ', n_object = ' + vips.n_objects + 
-        ', g_free = ' + vips.n_g_free);
+    console.log('processing' + filename + ', n_object = ' + vips.n_objects);
     var thumb = via_memory(filename, 500)
     // var thumb = via_files(filename, 500)
 
