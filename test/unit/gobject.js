@@ -1,8 +1,6 @@
-'use strict';
+/* global it, describe, beforeEach */
 
-const fs = require('fs');
-const path = require('path');
-const assert = require('assert');
+'use strict';
 
 const vips = require('../../');
 
@@ -15,7 +13,9 @@ describe('GObject', function () {
   });
 
   it('Can make a GObject', function () {
-    var go = vips.vips_operation_new('black');
-    var gobject = new vips.GObject(go);
+    var go = vips.vipsOperationNew('black');
+    var x = new vips.GObject(go);
+    x.objectRef();
+    x.objectUnref();
   });
 });

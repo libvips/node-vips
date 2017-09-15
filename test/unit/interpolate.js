@@ -1,7 +1,7 @@
+/* global it, describe, beforeEach */
+
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
 const assert = require('assert');
 const fixtures = require('../fixtures');
 
@@ -16,13 +16,13 @@ describe('Interpolate', function () {
   });
 
   it('Can make an interpolator', function () {
-    var interp = vips.Interpolate.new_from_name('bicubic');
+    vips.Interpolate.newFromName('bicubic');
   });
 
   it('Can set an interpolator for affine', function () {
-    var image = vips.Image.new_from_file(fixtures.output_vips_file);
-    var interp2 = vips.Interpolate.new_from_name('bilinear');
-    var interp3 = vips.Interpolate.new_from_name('bicubic');
+    var image = vips.Image.newFromFile(fixtures.output_vips_file);
+    var interp2 = vips.Interpolate.newFromName('bilinear');
+    var interp3 = vips.Interpolate.newFromName('bicubic');
     var image2 = image.affine([2, 0, 0, 2], {interpolate: interp2});
     var image3 = image.affine([2, 0, 0, 2], {interpolate: interp3});
 

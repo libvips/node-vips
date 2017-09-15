@@ -1,16 +1,9 @@
+/* global it, describe, beforeEach */
+
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
 const assert = require('assert');
 const vips = require('../../');
-const fixtures = require('../fixtures');
-
-function almostEqual (a, b, precision) {
-  precision = typeof precision !== 'undefined' ? precision : 0.000001;
-
-  return Math.abs(a - b) < precision;
-}
 
 describe('Relational operators', function () {
   beforeEach(function () {
@@ -22,25 +15,27 @@ describe('Relational operators', function () {
 
   it('.more works with scalar, vector and image arguments', function () {
     var image = vips.Image.black(2, 1).add(10);
-    var image2 = image.more(9);
+    var image2;
+
+    image2 = image.more(9);
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'uchar');
     assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [255]);
-    var image2 = image.more(10);
+    image2 = image.more(10);
     assert.deepEqual(image2.getpoint(0, 0), [0]);
 
-    var image = vips.Image.black(2, 1).add([10, 20]);
-    var image2 = image.more([5, 30]);
+    image = vips.Image.black(2, 1).add([10, 20]);
+    image2 = image.more([5, 30]);
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'uchar');
     assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [255, 0]);
 
-    var image = vips.Image.black(2, 1).add(10);
-    var image2 = image.more(image.add(20));
+    image = vips.Image.black(2, 1).add(10);
+    image2 = image.more(image.add(20));
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'uchar');

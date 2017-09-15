@@ -1,7 +1,7 @@
+/* global it, describe, beforeEach */
+
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
 const assert = require('assert');
 
 const vips = require('../../');
@@ -15,26 +15,26 @@ describe('Operation', function () {
   });
 
   it('Can make a Operation', function () {
-    var op = vips.Operation.new_from_name('black');
+    vips.Operation.newFromName('black');
   });
 
   it('Throws an exception for unknown operation', function () {
     assert.throws(function () {
-      vips.Operation.new_from_name('banana');
+      vips.Operation.newFromName('banana');
     });
   });
 
   it('Can get an operation\'s args', function () {
-    var op = vips.Operation.new_from_name('black');
-    var args = op.get_args();
+    var op = vips.Operation.newFromName('black');
+    var args = op.getArgs();
     assert.strictEqual(args.length, 4);
     assert.strictEqual(args[0][0], 'out');
     assert.strictEqual(args[0][1], 35);
   });
 
   it('Can get an operation\'s flags', function () {
-    var op = vips.Operation.new_from_name('black');
-    var flags = op.get_flags();
+    var op = vips.Operation.newFromName('black');
+    var flags = op.getFlags();
     assert.strictEqual(flags, 0);
   });
 
@@ -51,32 +51,32 @@ describe('Operation', function () {
   });
 
   it('call("black", 10, 10) does not fail', function () {
-    var image = vips.call('black', 10, 10);
+    vips.call('black', 10, 10);
   });
 
   it('Throws an exception for too many args', function () {
     assert.throws(function () {
-      var image = vips.call('black', 10, 10, 20);
+      vips.call('black', 10, 10, 20);
     });
   });
 
   it('Throws an exception for too few args', function () {
     assert.throws(function () {
-      var image = vips.call('black', 20);
+      vips.call('black', 20);
     });
   });
 
   it('Allows final hash arg', function () {
-    var image = vips.call('black', 10, 10, {});
+    vips.call('black', 10, 10, {});
   });
 
   it('Final hash arg can have options', function () {
-    var image = vips.call('black', 10, 10, {bands: 2});
+    vips.call('black', 10, 10, {bands: 2});
   });
 
   it('Throws an exception for unknown option', function () {
     assert.throws(function () {
-      var image = vips.call('black', 10, 10, {banana: 2});
+      vips.call('black', 10, 10, {banana: 2});
     });
   });
 });

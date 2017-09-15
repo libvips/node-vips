@@ -1,9 +1,8 @@
+/* global it, describe, beforeEach */
+
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
 const assert = require('assert');
-const ref = require('ref');
 
 const vips = require('../../');
 
@@ -16,7 +15,8 @@ describe('GValue', function () {
   });
 
   it('Can make a GValue', function () {
-    var gv = new vips.GValue();
+    var x = new vips.GValue();
+    x.init(vips.GTYPES.gboolean);
   });
 
   it('Can set/get a bool', function () {
@@ -82,14 +82,14 @@ describe('GValue', function () {
     gv.set(value);
     var result = gv.get();
 
-    for (var i = 0; i < result.length; i++) {
+    for (let i = 0; i < result.length; i++) {
       assert.strictEqual(result[i], value.charCodeAt(i));
     }
   });
 
   it('Can set/get a blob with binary data', function () {
     var value = new Uint8Array(256);
-    for (var i = 0; i < value.length; i++) {
+    for (let i = 0; i < value.length; i++) {
       value[i] = i;
     }
 
@@ -98,7 +98,7 @@ describe('GValue', function () {
     gv.set(value.buffer);
     var result = gv.get();
 
-    for (var i = 0; i < result.length; i++) {
+    for (let i = 0; i < result.length; i++) {
       assert.strictEqual(result[i], value[i]);
     }
   });
