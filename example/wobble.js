@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+'use strict';
+
 /*
  * A wobble effect. Run with eg.:
  *
@@ -37,6 +39,6 @@ function wobble (image) {
   return image.mapim(index);
 }
 
-var image = vips.Image.new_from_file(process.argv[2]);
+var image = vips.Image.newFromFile(process.argv[2]);
 image = wobble(image);
-image.write_to_file(process.argv[3]);
+image.writeToFile(process.argv[3]);

@@ -25,28 +25,39 @@
  */
 
 var fs = require('fs');
+var async = require('async');
 var vips = require('..');
 
 // benchmark thumbnail via a memory buffer
-function viaMemory (filename, thumbnailWidth) {
+function viaMemory (filename, thumbnailWidth, callback) {
   var data = fs.readFileSync(filename);
 
   var thumb = vips.Image.thumbnailBuffer(data, thumbnailWidth, {crop: 'centre'});
 
   // don't do anything with the result, this is just a test
   thumb.writeToBuffer('.jpg');
+
+  callback(null);
 }
 
 /*
 // benchmark thumbnail via files
-function viaFiles (filename, thumbnailWidth) {
+function viaFiles (filename, thumbnailWidth, callback) {
   var thumb = vips.Image.thumbnail(filename, thumbnailWidth, {crop: 'centre'});
 
   thumb.writeToBuffer('.jpg');
+
+  callback();
 }
  */
 
-for (let filename of process.argv.slice(2)) {
+var tasks = async.map(process.argv.slice(2), function (filename, callback) {
   console.log('processing' + filename + ', nObjects = ' + vips.nObjects);
-  viaMemory(filename, 500);
-}
+  viaMemory(filename, 500, callback);
+});
+
+async.parallelLimit(tasks, 1, function (err, results) {
+  if (err) {
+    throw new Error(err);
+  }
+});
