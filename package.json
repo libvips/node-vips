@@ -7,8 +7,7 @@
     "contributors": [],
     "main": "lib/index.js",
     "scripts": {
-        "test": "semistandard && cc && nyc --reporter=lcov --branches=99 mocha --slow=5000 --timeout=60000 ./test/unit/*.js",
-        "unit": "nyc --reporter=lcov --branches=99 mocha --slow=5000 --timeout=60000 ./test/unit/*.js"
+        "test": "semistandard && nyc --reporter=lcov --branches=99 mocha --slow=5000 --timeout=60000 ./test/unit/*.js"
     },
     "repository": {
         "type": "git",
@@ -31,14 +30,9 @@
         "weak": "^1.0.0"
     },
     "devDependencies": {
-        "cc": "^1.0.1",
         "mocha": "^3.4.2",
         "nyc": "^11.0.3",
         "semistandard": "^11.0.0"
     },
-    "license": "MIT",
-    "cc": {
-        "linelength": "80",
-        "filter": []
-    }
+    "license": "MIT"
 }

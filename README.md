@@ -3,7 +3,8 @@
 # Status
 
 It's mostly complete, it seems stable, and it passes the tests suite with no
-errors or leaks. 
+errors or leaks. It can reliably thumbnail 10,000 jpeg images in constant 
+memory and without falling over. 
 
 # Example
 
@@ -44,9 +45,9 @@ Install everything
 
 	npm install 
 
-Run the unit tests experimentally
+Run the tests
 
-	npm run-script unit
+	npm test
 
 Run a single test with the GC enabled
 
@@ -54,7 +55,7 @@ Run a single test with the GC enabled
 
 Regenerate convenience wrappers
 
-	vips = require('vips')
-	vips.generate_wrappers()
+	vips = require('vips');
+	vips.generateWrappers();
 
 and copy output to `lib/autogen.js`.
