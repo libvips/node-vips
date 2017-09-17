@@ -30,14 +30,14 @@ var vips = require('..');
 
 // benchmark thumbnail via a memory buffer
 function viaMemory (filename, thumbnailWidth, callback) {
+  process.nextTick();
+
   var data = fs.readFileSync(filename);
 
   var thumb = vips.Image.thumbnailBuffer(data, thumbnailWidth, {crop: 'centre'});
 
   // don't do anything with the result, this is just a test
-  thumb.writeToBuffer('.jpg');
-
-  callback(null);
+  thumb.writeToBuffer('.jpg', {async: callback});
 }
 
 /*
