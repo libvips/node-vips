@@ -25,6 +25,22 @@ image = image.conv(mask, {precision: 'integer'});
 image.writeToFile(process.argv[3]);
 ```
 
+# `async`
+
+You can call any operation with an `async` options, for example:
+
+```javascript
+image.writeToFile('file.jpg', {
+  Q: 90,
+  async: (err, result) => {
+    if (err) {
+      throw err;
+    }
+  }
+});
+
+```
+
 # References
 
 https://github.com/node-ffi/node-ffi
