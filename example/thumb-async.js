@@ -29,16 +29,11 @@ var async = require('async');
 var vips = require('..');
 
 function thumbnail (filename, thumbnailWidth, callback) {
-  fs.readFile(filename, (err, data) => {
-    if (err) {
-      throw err;
-    }
+  var data = fs.readFileSync(filename);
 
-    var thumb =
-      vips.Image.thumbnailBuffer(data, thumbnailWidth, {crop: 'centre'});
+  var thumb = vips.Image.thumbnailBuffer(data, thumbnailWidth, {crop: 'centre'});
 
-    thumb.writeToBuffer('.jpg', {async: callback});
-  });
+  thumb.writeToBuffer('.jpg', {async: callback});
 }
 
 var tasks = async.map(process.argv.slice(2), (filename, callback) => {
