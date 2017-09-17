@@ -34,7 +34,7 @@ function thumbnail (filename, thumbnailWidth, callback) {
       throw err;
     }
 
-    var thumb = 
+    var thumb =
       vips.Image.thumbnailBuffer(data, thumbnailWidth, {crop: 'centre'});
 
     thumb.writeToBuffer('.jpg', {async: callback});
