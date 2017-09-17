@@ -25,6 +25,11 @@ image = image.conv(mask, {precision: 'integer'});
 image.writeToFile(process.argv[3]);
 ```
 
+# async
+
+It ought to be easy to add, node-ffi has straightforward support for this.
+There's a branch with an experiment. 
+
 # References
 
 https://github.com/node-ffi/node-ffi
