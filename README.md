@@ -4,7 +4,7 @@
 
 It's mostly complete, it seems stable, and it passes the tests suite with no
 errors or leaks. It can reliably thumbnail 10,000 jpeg images in constant 
-memory and without falling over. 
+memory and without falling over. Probably. 
 
 # Example
 
@@ -17,18 +17,43 @@ image = image.crop(100, 100, image.width - 200, image.height - 200);
 image = image.reduce(1.0 / 0.9, 1.0 / 0.9, {kernel: 'linear'});
 
 var mask = vips.Image.newFromArray(
-    [[-1,  -1, -1], 
-     [-1,  16, -1], 
-     [-1,  -1, -1]], 8);
+  [[-1,  -1, -1], 
+   [-1,  16, -1], 
+   [-1,  -1, -1]], 8);
 image = image.conv(mask, {precision: 'integer'});
 
 image.writeToFile(process.argv[3]);
 ```
 
-# async
+# `async`
 
-It ought to be easy to add, node-ffi has straightforward support for this.
-There's a branch with an experiment. 
+node-vips is synchronous by default, but you can call any operation with the 
+special `async` option, for example:
+
+```javascript
+image.writeToFile('file.jpg', {
+  Q: 90,
+  async: (err, result) => {
+    if (err) {
+      throw err;
+    }
+  }
+});
+
+image.max({
+  async: (err, result) => {
+    if (err) {
+      throw err;
+    }
+
+    console.log('maximum value in image is ' + result);
+  }
+});
+
+```
+
+Most operations are instant -- it only makes sense to use async for things
+which will trigger a pixel loop.
 
 # References
 
