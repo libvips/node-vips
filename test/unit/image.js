@@ -194,6 +194,30 @@ describe('Image', function () {
     assert.deepEqual(image2.getpoint(0, 0), [10, 11, 12, 128, 10, 11, 12]);
   });
 
+  if (vips.atLeastLibvips(8, 6)) {
+    it('.composite works', function () {
+      var image = vips.Image.black(2, 1, {bands: 3}).add([10, 11, 12]);
+      var overlay;
+      var base;
+      var comp;
+
+      overlay = image.bandjoin(128);
+      base = image.add(100);
+      comp = base.composite(overlay, 'over');
+
+      assert.strictEqual(comp.width, 2);
+      assert.strictEqual(comp.height, 1);
+      assert.strictEqual(comp.bands, 4);
+      assert.strictEqual(comp.format, 'float');
+      assert.strictEqual(comp.interpretation, 'multiband');
+
+      assert.ok(Math.abs(comp.getpoint(0, 0)[0] - 59.8) < 0.1);
+      assert.ok(Math.abs(comp.getpoint(0, 0)[1] - 60.8) < 0.1);
+      assert.ok(Math.abs(comp.getpoint(0, 0)[2] - 61.8) < 0.1);
+      assert.ok(Math.abs(comp.getpoint(0, 0)[3] - 255) < 0.1);
+    });
+  }
+
   it('Can draw on an image', function () {
     var image = vips.Image.black(64, 64);
     var image2 = image.drawCircle(255, 32, 32, 32, {fill: true});

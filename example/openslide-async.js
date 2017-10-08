@@ -6,15 +6,17 @@ var vips = require('..');
 
 // get a rect from a level
 // autocrop trims off pixels outside the image bounds
-vips.Image.openslideload(process.argv[2], 
-  {level: 2, autocrop: true, async: (err, image) => {
+vips.Image.openslideload(process.argv[2], {
+  level: 2,
+  autocrop: true,
+  async: (err, image) => {
     if (err) {
       throw err;
     }
 
     console.log('level size:', image.width, 'x', image.height);
 
-    // try 'vipsheader -a somefile.svs' at the command-line to see all the 
+    // try 'vipsheader -a somefile.svs' at the command-line to see all the
     // metadata fields you can get
     console.log('associated images are:', image.get('slide-associated-images'));
 
@@ -25,11 +27,13 @@ vips.Image.openslideload(process.argv[2],
         throw err;
       }
     }});
-}});
+  }
+});
 
 // extract an associated image
-vips.Image.openslideload(process.argv[2], 
-  {associated: 'label', async: (err, image) => {
+vips.Image.openslideload(process.argv[2], {
+  associated: 'label',
+  async: (err, image) => {
     if (err) {
       throw err;
     }
@@ -39,6 +43,5 @@ vips.Image.openslideload(process.argv[2],
         throw err;
       }
     }});
-}});
-
-
+  }
+});
