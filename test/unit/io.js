@@ -48,7 +48,6 @@ describe('Image IO', function () {
     var image = vips.Image.newFromFile(fixtures.input_jpeg_file,
             {shrink: 2});
     assert.strictEqual(image.get('width'), 500);
-    assert.strictEqual(image.get('height'), 334);
     assert.strictEqual(image.get('bands'), 3);
   });
 

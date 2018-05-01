@@ -27,21 +27,20 @@ describe('Image arithmetic', function () {
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
+      /* Don't test interpretation, it differs between libvips versions.
+       */
     assert.deepEqual(image2.getpoint(0, 0), [1]);
 
     image2 = image.add([1, 2]);
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [1, 2]);
 
     image2 = image2.add(image2);
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [2, 4]);
   });
 
@@ -53,21 +52,18 @@ describe('Image arithmetic', function () {
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [9]);
 
     image2 = image.add([10, 11]).subtract([9, 3]);
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [1, 8]);
 
     image2 = image.add(image2).add(image2).subtract(image2);
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [1, 8]);
   });
 
@@ -79,21 +75,18 @@ describe('Image arithmetic', function () {
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [10]);
 
     image2 = image.add([10, 11]).rsubtract([12, 16]);
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [2, 5]);
 
     image2 = image.add(image2).add(image2).rsubtract(image2);
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [-2, -5]);
   });
 
@@ -105,21 +98,18 @@ describe('Image arithmetic', function () {
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [2]);
 
     image2 = image.add([1, 2]).multiply([2, 3]);
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [2, 6]);
 
     image2 = image2.multiply(image2);
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [4, 36]);
   });
 
@@ -131,21 +121,18 @@ describe('Image arithmetic', function () {
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [5]);
 
     image2 = image.add([10, 30]).divide([2, 3]);
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [5, 10]);
 
     image2 = image2.add(image2).divide(image2);
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [2, 2]);
   });
 
@@ -157,21 +144,18 @@ describe('Image arithmetic', function () {
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [5]);
 
     image2 = image.add([2, 3]).rdivide([10, 30]);
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [5, 10]);
 
     image2 = image2.rdivide(image2.add(image2));
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [2, 2]);
   });
 
@@ -183,21 +167,18 @@ describe('Image arithmetic', function () {
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [1]);
 
     image2 = image.add([10, 30]).remainder([3, 4]);
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [1, 2]);
 
     image2 = image2.add(image2).remainder(image2);
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'float');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [0, 0]);
   });
 

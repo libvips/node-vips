@@ -21,7 +21,6 @@ describe('Relational operators', function () {
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'uchar');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [255]);
     image2 = image.more(10);
     assert.deepEqual(image2.getpoint(0, 0), [0]);
@@ -31,7 +30,6 @@ describe('Relational operators', function () {
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'uchar');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [255, 0]);
 
     image = vips.Image.black(2, 1).add(10);
@@ -39,7 +37,6 @@ describe('Relational operators', function () {
     assert.strictEqual(image2.width, 2);
     assert.strictEqual(image2.height, 1);
     assert.strictEqual(image2.format, 'uchar');
-    assert.strictEqual(image2.interpretation, 'b-w');
     assert.deepEqual(image2.getpoint(0, 0), [0]);
   });
 
