@@ -1,7 +1,7 @@
 {
     "name": "vips-ffi",
     "description": "binding for the libvips image processing library",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "author": "John Cupitt <jcupitt@gmail.com>",
     "homepage": "https://github.com/jcupitt/node-vips",
     "contributors": [],

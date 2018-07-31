@@ -89,3 +89,5 @@ Regenerate convenience wrappers
 	vips.generateWrappers();
 
 and copy output to `lib/autogen.js`.
+
+see `example/gen-wrapper.js`.
