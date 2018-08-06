@@ -6,6 +6,7 @@
 
 * update for 8.7
 * add `gifsave` example
+* fix five small memleaks [kleisauke]
 
 ## Version 0.1.0 
 
