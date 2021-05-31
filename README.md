@@ -1,5 +1,8 @@
 # Experimental node.js binding for libvips built on ffi
 
+**Unmaintained** This package depends on npm packages which are now
+unmaintained. It needs updating to (perhaps?) use `ffi-napi`.
+
 # Status
 
 It's mostly complete, it seems stable, and it passes the tests suite with no
